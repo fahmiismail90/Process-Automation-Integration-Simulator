@@ -15,6 +15,15 @@ const scenarios = {
         "Posting Material Document successfully. Doc ID: 50029381...",
         "Pipeline executed successfully."
     ],
+    'warehouse-inbound': [
+        "Starting Unattended RDP Robot Worker #02...",
+        "Connecting to Warehouse Management (WM) module...",
+        "Processing inbound delivery notification from ASN stream...",
+        "Executing transaction LT04 (Create Transfer Order for Delivery)...",
+        "Assigning bin storage locations across zone C-04...",
+        "Confirming Transfer Order via LT12. Status: Verified...",
+        "Inbound logistics pipeline completed successfully."
+    ],
     'invoice-cancel': [
         "Initializing background runner...",
         "Authenticating session against SAP ECC backend...",
@@ -32,37 +41,3 @@ const scenarios = {
         "Pipeline executed successfully."
     ]
 };
-
-runBtn.addEventListener('click', async () => {
-    const selectedScenario = workflowSelect.value;
-    const logs = scenarios[selectedScenario];
-
-    // Reset UI state
-    runBtn.disabled = true;
-    statusBadge.textContent = "Running";
-    statusBadge.className = "badge running";
-    mStatus.textContent = "In Progress";
-    mCount.textContent = "0";
-    mTime.textContent = "0.0s";
-    logOutput.textContent = "";
-
-    let startTime = performance.now();
-    let step = 0;
-
-    const interval = setInterval(() => {
-        if (step < logs.length) {
-            logOutput.textContent += `[${new Date().toLocaleTimeString()}] ${logs[step]}\n`;
-            logOutput.scrollTop = logOutput.scrollHeight;
-            mCount.textContent = step + 1;
-            let elapsed = ((performance.now() - startTime) / 1000).toFixed(1);
-            mTime.textContent = `${elapsed}s`;
-            step++;
-        } else {
-            clearInterval(interval);
-            statusBadge.textContent = "Completed";
-            statusBadge.className = "badge success";
-            mStatus.textContent = "Success";
-            runBtn.disabled = false;
-        }
-    }, 700);
-});
