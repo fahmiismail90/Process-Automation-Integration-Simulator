@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Integration & Automation Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header class="hero">
+        <div class="container">
+            <h1>Fahmi Ismail</h1>
+            <p class="subtitle">Enterprise Integration Consultant & Technical Specialist</p>
+            <p class="bio">Specializing in robust system integration, low-code architecture, and end-to-end automation workflows.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="portfolio-intro">
+            <h2>Interactive Showcase</h2>
+            <p>Test drive the live workflow simulator below to experience a mock automated transaction pipeline in action.</p>
+        </section>
+
+        <!-- Interactive Simulator Widget -->
+        <section class="simulator-card">
+            <div class="simulator-header">
+                <h3>SAP & Automation Pipeline Simulator</h3>
+                <span id="status-badge" class="badge idle">Idle</span>
+            </div>
+            
+            <div class="simulator-controls">
+                <label for="workflow-select">Select Scenario:</label>
+                <select id="workflow-select">
+                    <option value="goods-receipt">Order-to-Cash: Goods Receipt & Posting (MB01 / MIGO)</option>
+                    <option value="invoice-cancel">Financials: Invoice Cancellation & Clearing (MR8M)</option>
+                    <option value="idoc-outbound">Master Data: Merchandise Category Outbound (SA38)</option>
+                </select>
+                <button id="run-btn" class="primary-btn">Execute Pipeline</button>
+            </div>
+
+            <div class="simulator-body">
+                <div class="log-container">
+                    <h4>Execution Logs</h4>
+                    <pre id="log-output">System ready. Click 'Execute Pipeline' to begin simulation...</pre>
+                </div>
+                <div class="metrics-panel">
+                    <h4>Transaction Metrics</h4>
+                    <ul id="metrics-list">
+                        <li><span>Status:</span> <span id="m-status">-</span></li>
+                        <li><span>Transactions Processed:</span> <span id="m-count">0</span></li>
+                        <li><span>Execution Time:</span> <span id="m-time">0.0s</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Fahmi Ismail. Hosted on GitHub Pages.</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
