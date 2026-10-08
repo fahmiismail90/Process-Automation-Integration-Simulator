@@ -41,3 +41,43 @@ const scenarios = {
         "Pipeline executed successfully."
     ]
 };
+
+runBtn.addEventListener('click', () => {
+    const selectedScenario = workflowSelect.value;
+    const logs = scenarios[selectedScenario];
+
+    // Safety check if key doesn't match
+    if (!logs) {
+        logOutput.textContent = `[Error] Scenario configuration for '${selectedScenario}' not found.`;
+        return;
+    }
+
+    // Reset UI state
+    runBtn.disabled = true;
+    statusBadge.textContent = "Running";
+    statusBadge.className = "badge running";
+    mStatus.textContent = "In Progress";
+    mCount.textContent = "0";
+    mTime.textContent = "0.0s";
+    logOutput.textContent = "";
+
+    let startTime = performance.now();
+    let step = 0;
+
+    const interval = setInterval(() => {
+        if (step < logs.length) {
+            logOutput.textContent += `[${new Date().toLocaleTimeString()}] ${logs[step]}\n`;
+            logOutput.scrollTop = logOutput.scrollHeight;
+            mCount.textContent = step + 1;
+            let elapsed = ((performance.now() - startTime) / 1000).toFixed(1);
+            mTime.textContent = `${elapsed}s`;
+            step++;
+        } else {
+            clearInterval(interval);
+            statusBadge.textContent = "Completed";
+            statusBadge.className = "badge success";
+            mStatus.textContent = "Success";
+            runBtn.disabled = false;
+        }
+    }, 700);
+});
